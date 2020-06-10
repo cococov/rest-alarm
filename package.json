@@ -1,0 +1,29 @@
+{
+  "name": "rest-alarm",
+  "version": "1.0.0",
+  "description": "Configurable CLI Alarm to remember to rest from the PC screen.",
+  "main": "alarm.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/alarm.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cococov/rest-alarm.git"
+  },
+  "keywords": [
+    "alarm",
+    "node",
+    "rest",
+    "developer"
+  ],
+  "author": "Juan Carlos Lamas Alfaro",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/cococov/rest-alarm/issues"
+  },
+  "homepage": "https://github.com/cococov/rest-alarm#readme",
+  "dependencies": {
+    "node-notifier": "^7.0.1"
+  }
+}
