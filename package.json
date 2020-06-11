@@ -4,7 +4,6 @@
   "description": "Configurable CLI Alarm to remember to rest from the PC screen.",
   "main": "alarm.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/alarm.js"
   },
   "repository": {
