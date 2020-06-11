@@ -1,21 +1,38 @@
+'use strict';
+
 const notifications = require('./notifications');
 const timers = require('./timers');
+const fs = require('fs').promises;
+const setup = require('./setup');
+const log = require('./log');
+const util = require('util');
 
 const { initNotification, sendNotification } = notifications;
 const { workTimer } = timers;
 
-/* Variables */
-const time = {
-  workTime: 30,
-  restTime: 5
-};
+var settings = {};
 
 /* _INIT_ */
-sendNotification(
-  initNotification(),
-  () => {
-    console.log('_INIT_');
-    console.log('_WORK_');
-    workTimer(time);
-  }
-);
+const init = async () => {
+
+  try {
+    let settingsFile = await fs.readFile('settings.json');
+    settings = JSON.parse(settingsFile);
+  } catch (err) {
+    settings = await setup();
+    console.log('\n-----------------\n');
+  };
+
+  const { workTime, restTime, language } = settings;
+
+  sendNotification(
+    initNotification(),
+    () => {
+      log('_INIT_');
+      log('_WORK_');
+      workTimer({ workTime, restTime });
+    }
+  );
+};
+
+init();

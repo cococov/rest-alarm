@@ -1,4 +1,7 @@
+'use strict';
+
 const notifications = require('./notifications');
+const log = require('./log');
 
 const {
   restNotification,
@@ -15,7 +18,7 @@ const workTimer = async (time) => {
     sendNotification(
       restNotification(workTime, restTime),
       () => {
-        console.log('_REST_');
+        log('_REST_');
         restTimer(time);
       }
     );
@@ -31,7 +34,7 @@ const restTimer = async (time) => {
     sendNotification(
       workNotification(restTime),
       () => {
-        console.log('_WORK_');
+        log('_WORK_');
         workTimer(time);
       }
     );

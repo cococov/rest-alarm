@@ -1,3 +1,5 @@
+'use strict';
+
 const path = require('path');
 const notifier = require('node-notifier');
 
@@ -37,5 +39,5 @@ module.exports = {
   restNotification,
   workNotification,
   initNotification,
-  sendNotification,
+  sendNotification
 }
