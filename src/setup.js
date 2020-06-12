@@ -16,7 +16,7 @@ const setup = async () => {
       type: 'number',
       name: 'workTime',
       message: 'Tiempo de trabajo [Minutos]: ',
-      default: 30
+      default: 25
     },
     {
       type: 'number',

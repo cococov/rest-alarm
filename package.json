@@ -4,7 +4,8 @@
   "description": "Configurable CLI Alarm to remember to rest from the PC screen.",
   "main": "alarm.js",
   "scripts": {
-    "start": "node src/alarm.js"
+    "start": "node src/alarm.js",
+    "setup": "node src/alarm.js setup"
   },
   "repository": {
     "type": "git",
