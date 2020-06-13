@@ -1,7 +1,7 @@
 'use strict';
 
-const notifications = require('./notifications');
-const timers = require('./timers');
+const notifications = require('./alarm.notifications');
+const timers = require('./alarm.timers');
 const fs = require('fs').promises;
 const setup = require('./setup');
 const log = require('./log');

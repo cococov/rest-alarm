@@ -1,6 +1,6 @@
 'use strict';
 
-const notifications = require('./notifications');
+const notifications = require('./alarm.notifications');
 const log = require('./log');
 
 const {
