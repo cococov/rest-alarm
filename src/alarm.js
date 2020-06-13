@@ -24,7 +24,7 @@ const init = async () => {
     let settingsFile = await fs.readFile('settings.json');
     settings = JSON.parse(settingsFile);
     console.log('\nsettings.json loaded...');
-    !args[0] && console.log('[run the app with `npm run setup` to change the settings]');
+    !args[0] && console.log('\n[run the app with `npm run setup` to change the settings]');
   } catch (err) {
     settings = await setup();
   };
