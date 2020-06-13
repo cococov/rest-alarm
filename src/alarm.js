@@ -2,6 +2,7 @@
 
 const notifications = require('./alarm.notifications');
 const timers = require('./alarm.timers');
+const readline = require('readline');
 const fs = require('fs').promises;
 const setup = require('./setup');
 const log = require('./log');
@@ -13,6 +14,11 @@ const { workTimer } = timers;
 const args = process.argv.slice(2);
 let settings = {};
 let begginTime = 0;
+
+/* const quitListener = () => {
+
+
+}; */
 
 /* _INIT_ */
 const init = async () => {
@@ -48,3 +54,17 @@ init();
 
 // TODO: Implements localization (using good practices)
 // TODO: Implement total working time and total time
+
+readline.emitKeypressEvents(process.stdin);
+process.stdin.setRawMode(true);
+
+process.stdin.on('keypress', (str, key) => {
+  if (key.ctrl && key.name === 'c') {
+    process.exit();
+  } else {
+    console.log(`You pressed the "${str}" key`);
+    console.log();
+    console.log(key);
+    console.log();
+  }
+});
