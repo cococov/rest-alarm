@@ -23,6 +23,8 @@ let begginTime = 0;
 /* _INIT_ */
 const init = async () => {
 
+  console.clear();
+
   if (args[0] === 'setup')
     settings = await setup();
 
@@ -59,7 +61,7 @@ readline.emitKeypressEvents(process.stdin);
 process.stdin.setRawMode(true);
 
 process.stdin.on('keypress', (str, key) => {
-  if (key.ctrl && key.name === 'c') {
+  if (key.ctrl && key.name === 'q') {
     process.exit();
   } else {
     console.log(`You pressed the "${str}" key`);
