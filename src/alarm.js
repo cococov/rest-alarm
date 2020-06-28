@@ -6,7 +6,8 @@ const readline = require('readline');
 const fs = require('fs').promises;
 const setup = require('./setup');
 const log = require('./log');
-const util = require('util');
+const { getFormatDate } = require('./utils');
+
 
 const { initNotification, sendNotification } = notifications;
 const { workTimer } = timers;
@@ -14,11 +15,6 @@ const { workTimer } = timers;
 const args = process.argv.slice(2);
 let settings = {};
 let begginTime = 0;
-
-/* const quitListener = () => {
-
-
-}; */
 
 /* _INIT_ */
 const init = async () => {
@@ -55,18 +51,24 @@ const init = async () => {
 init();
 
 // TODO: Implements localization (using good practices)
-// TODO: Implement total working time and total time
+
+/* Key press listeners */
 
 readline.emitKeypressEvents(process.stdin);
 process.stdin.setRawMode(true);
 
 process.stdin.on('keypress', (str, key) => {
-  if (key.ctrl && key.name === 'q') {
-    process.exit();
-  } else {
-    console.log(`You pressed the "${str}" key`);
-    console.log();
-    console.log(key);
-    console.log();
+  if (key.ctrl) {
+    switch (key.name) {
+      case 'q':
+        let finishTime = (new Date).getTime();
+        let workedTime = finishTime - begginTime;
+        let formatedWorkedTime = getFormatDate(workedTime);
+        console.log(`\n\nWorked Time: ${formatedWorkedTime}\n\n`);
+        process.exit();
+      case 's':
+        console.log('setup');
+        break;
+    }
   }
 });
