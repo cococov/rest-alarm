@@ -111,4 +111,4 @@ var application = new main();
 application.init({ isWithSetup: (ARGS[0] === 'setup' || ARGS[0] === 's') });
 
 
-// TODO: Implements localization (using good practices)
+// TODO: Implements localization

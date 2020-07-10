@@ -5,7 +5,8 @@
   "main": "src/alarm.js",
   "scripts": {
     "start": "node src/alarm.js",
-    "setup": "node src/alarm.js setup"
+    "setup": "node src/alarm.js setup",
+    "help": "node src/alarm.js help"
   },
   "repository": {
     "type": "git",
