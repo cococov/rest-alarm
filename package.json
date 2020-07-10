@@ -2,7 +2,7 @@
   "name": "rest-alarm",
   "version": "1.0.0",
   "description": "Configurable CLI Alarm to remember to rest from the PC screen.",
-  "main": "alarm.js",
+  "main": "src/alarm.js",
   "scripts": {
     "start": "node src/alarm.js",
     "setup": "node src/alarm.js setup"

@@ -27,9 +27,10 @@ const setup = async () => {
   ]);
 
   let answersString = JSON.stringify(answers);
-  console.log('\nWritting settings file...');
+  console.log('\nWriting settings file...');
   await fs.writeFile('settings.json', answersString);
 
+  console.clear();
   return answers;
 }
 

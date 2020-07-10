@@ -1,47 +1,62 @@
 'use strict';
 
-const notifications = require('./alarm.notifications');
+const NotificationHandler = require('./alarm.notifications');
 const log = require('./log');
 
-const {
-  restNotification,
-  workNotification,
-  sendNotification
-} = notifications;
+class TimerHandler {
+  #_notificationHandler;
+  #_time;
+  #_workTimeoutRef;
+  #_restTimeoutRef;
 
-/* Work timer */
-const workTimer = async (time) => {
-  const { workTime, restTime } = time;
-  const timeout = workTime * 60 * 1000;
+  constructor() {
+    this.#_notificationHandler = new NotificationHandler();
+    this.#_time = {};
+    this.#_workTimeoutRef = null;
+    this.#_restTimeoutRef = null;
+  };
 
-  setTimeout(() => {
-    sendNotification(
-      restNotification(workTime, restTime),
-      () => {
-        log('_REST_');
-        restTimer(time);
-      }
-    );
-  }, timeout);
-};
+  /* Work timer */
+  #workTimer = async () => {
+    const { workTime } = this.#_time;
+    const timeout = workTime * 60 * 1000;
 
-/* Rest timer */
-const restTimer = async (time) => {
-  const { restTime } = time;
-  const timeout = restTime * 60 * 1000;
+    this.#_workTimeoutRef = setTimeout(() => {
+      this.#_notificationHandler
+        .sendNotification({
+          type: 'REST',
+          callBack: () => { log('_REST_'); this.#restTimer(); },
+          payload: this.#_time
+        });
+    }, timeout);
+  };
 
-  setTimeout(() => {
-    sendNotification(
-      workNotification(restTime),
-      () => {
-        log('_WORK_');
-        workTimer(time);
-      }
-    );
-  }, timeout);
-};
+  /* Rest timer */
+  #restTimer = async () => {
+    const { restTime } = this.#_time;
+    const timeout = restTime * 60 * 1000;
 
-module.exports = {
-  workTimer,
-  restTimer
+    this.#_restTimeoutRef = setTimeout(() => {
+      this.#_notificationHandler
+        .sendNotification({
+          type: 'WORK',
+          callBack: () => { log('_WORK_'); this.#workTimer(); },
+          payload: this.#_time
+        });
+    }, timeout);
+  };
+
+  /* START */
+  startTimer = time => {
+    this.#_time = time;
+    this.#workTimer();
+  };
+
+  /* STOP */
+  stopTimer = () => {
+    clearTimeout(this.#_workTimeoutRef);
+    clearTimeout(this.#_restTimeoutRef);
+  };
+
 }
+module.exports = TimerHandler;
