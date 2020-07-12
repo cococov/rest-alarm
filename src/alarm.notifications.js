@@ -25,7 +25,7 @@ class NotificationHandler {
   });
 
   #initNotification = () => ({
-    title: `Rest Time iniciado`,
+    title: `Rest Alarm iniciado`,
     message: `Aplicación iniciada.`,
     icon: path.join(__dirname, '../img/clock.png'),
     sound: true,
