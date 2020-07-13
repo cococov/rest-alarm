@@ -29,7 +29,10 @@ class TimerHandler {
       this.#_notificationHandler
         .sendNotification({
           type: 'REST',
-          callBack: () => { log('_REST_'); this.#restTimer(); },
+          callBack: () => {
+            log((this.#_cycles === 4) ? '_LONG REST_' : '_REST_');
+            this.#restTimer();
+          },
           payload: { ...this.#_time, isLarge: (this.#_cycles === 4) }
         });
     }, timeout);
