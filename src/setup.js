@@ -21,8 +21,14 @@ const setup = async () => {
     {
       type: 'number',
       name: 'restTime',
-      message: 'Tiempo de descanso [Minutos]: ',
+      message: 'Tiempo de descanso corto [Minutos]: ',
       default: 5
+    },
+    {
+      type: 'number',
+      name: 'restTimeLarge',
+      message: 'Tiempo de descanso largo [Minutos]: ',
+      default: 30
     }
   ]);
 

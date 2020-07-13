@@ -54,12 +54,12 @@ class main {
 
     console.log('\n-----------------\n');
 
-    const { workTime, restTime, language } = this.#_settings;
+    const { workTime, restTime, restTimeLarge, language } = this.#_settings;
 
     let callBack = () => {
       this.#_beginTime = (new Date).getTime();
       log('_INIT_'); log('_WORK_');
-      this.#_timerHandler.startTimer({ workTime, restTime });
+      this.#_timerHandler.startTimer({ workTime, restTime, restTimeLarge });
     };
 
     this.#keyListener();

@@ -8,40 +8,50 @@ class TimerHandler {
   #_time;
   #_workTimeoutRef;
   #_restTimeoutRef;
+  #_cycles;
 
   constructor() {
     this.#_notificationHandler = new NotificationHandler();
-    this.#_time = {};
     this.#_workTimeoutRef = null;
     this.#_restTimeoutRef = null;
+    this.#_cycles = 0;
+    this.#_time = {};
   };
 
   /* Work timer */
   #workTimer = async () => {
     const { workTime } = this.#_time;
-    const timeout = workTime * 60 * 1000;
+    let timeout = workTime * 60 * 1000;
+
+    this.#_cycles++;
 
     this.#_workTimeoutRef = setTimeout(() => {
       this.#_notificationHandler
         .sendNotification({
           type: 'REST',
           callBack: () => { log('_REST_'); this.#restTimer(); },
-          payload: this.#_time
+          payload: { ...this.#_time, isLarge: (this.#_cycles === 4) }
         });
     }, timeout);
   };
 
   /* Rest timer */
   #restTimer = async () => {
-    const { restTime } = this.#_time;
-    const timeout = restTime * 60 * 1000;
+    const { restTime, restTimeLarge } = this.#_time;
+    let selectedTime = this.#_cycles === 4 ? restTimeLarge : restTime;
+    let timeout = selectedTime * 60 * 1000;
 
     this.#_restTimeoutRef = setTimeout(() => {
       this.#_notificationHandler
         .sendNotification({
           type: 'WORK',
-          callBack: () => { log('_WORK_'); this.#workTimer(); },
-          payload: this.#_time
+          callBack: () => {
+            log('_WORK_');
+            if (this.#_cycles === 4)
+              this.#_cycles = 0;
+            this.#workTimer();
+          },
+          payload: { ...this.#_time, isLarge: (this.#_cycles === 4) }
         });
     }, timeout);
   };

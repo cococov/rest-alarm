@@ -6,19 +6,19 @@ const notifier = require('node-notifier');
 class NotificationHandler {
 
   /* Notification objects */
-  #restNotification = ({ workTime, restTime }) => ({
+  #restNotification = ({ workTime, restTime, restTimeLarge, isLarge }) => ({
     title: `Hora de descansar`,
     subtitle: `${restTime} minutos de descanso`,
-    message: `Ya has trabajado ${workTime} minutos, es hora de que descanses ${restTime} minutos alejado de la pantalla.`,
+    message: `Ya has trabajado ${workTime} minutos${isLarge ? ' 4 veces' : ''}, es hora de que descanses ${isLarge ? restTimeLarge : restTime} minutos alejado de la pantalla.`,
     icon: path.join(__dirname, '../img/clock.png'),
     sound: true,
     wait: true
   });
 
-  #workNotification = ({ restTime }) => ({
+  #workNotification = ({ restTime, restTimeLarge, isLarge }) => ({
     title: `¡A trabajar!`,
     subtitle: `Descanso terminado`,
-    message: `Ya descansaste ${restTime} minutos, es hora de volver a trabajar.`,
+    message: `Ya descansaste ${isLarge ? restTimeLarge : restTime} minutos, es hora de volver a trabajar.`,
     icon: path.join(__dirname, '../img/clock.png'),
     sound: true,
     wait: true
