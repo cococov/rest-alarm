@@ -26,6 +26,6 @@
   "homepage": "https://github.com/cococov/rest-alarm#readme",
   "dependencies": {
     "inquirer": "^7.1.0",
-    "node-notifier": "^7.0.1"
+    "node-notifier": "^8.0.1"
   }
 }
