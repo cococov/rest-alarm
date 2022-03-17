@@ -6,13 +6,16 @@ Configurable CLI Alarm to remember to rest from the PC screen.
 - Node.js
 
 ```mermaid
-  graph TD;
-      Work-1-->Rest-5-min;
-      Rest-5-min-->Work-2;
-      Work-2-->Rest-5-min;
-      Rest-5-min-->Work-3;
-      Work-3-->Rest-5-min;
-      Rest-5-min-->Work-4;
-      Work-4-->Rest-30-min;
-      Rest-30-min-->Work-1;
+  graph LR;
+      B[BEGGIN] --> W
+      W[Work iteration] --> RQ1{Is 4th iteration?}
+      RQ1 --> |No| RA1[5 minutes rest]
+      RA1 --> W
+      RQ1 --> |Yes| RA2[30 minutes rest]
+      RA2 --> W
+      W --> RQ2{Closed?}
+      RA1 --> RQ2
+      RA2 --> RQ2
+      RQ2 --> R[Print time worked]
+      R --> E[END]      
 ```
