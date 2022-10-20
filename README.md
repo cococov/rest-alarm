@@ -4,6 +4,7 @@ Configurable CLI Alarm to remember to rest from the PC screen.
 ## Technologies used
 
 - Node.js
+- mplayer
 
 ```mermaid
   graph LR;
@@ -17,5 +18,5 @@ Configurable CLI Alarm to remember to rest from the PC screen.
       RA1 --> RQ2
       RA2 --> RQ2
       RQ2 --> R[Print time worked]
-      R --> E[END]      
+      R --> E[END]
 ```

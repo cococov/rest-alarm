@@ -2,6 +2,7 @@
 
 const path = require('path');
 const notifier = require('node-notifier');
+const player = require('play-sound')();
 
 class NotificationHandler {
 
@@ -11,7 +12,7 @@ class NotificationHandler {
     subtitle: `${restTime} minutos de descanso`,
     message: `Ya has trabajado ${workTime} minutos${isLarge ? ' 4 veces' : ''}, es hora de que descanses ${isLarge ? restTimeLarge : restTime} minutos alejado de la pantalla.`,
     icon: path.join(__dirname, '../img/clock.png'),
-    sound: true,
+    sound: false,
     wait: true
   });
 
@@ -20,7 +21,7 @@ class NotificationHandler {
     subtitle: `Descanso terminado`,
     message: `Ya descansaste ${isLarge ? restTimeLarge : restTime} minutos, es hora de volver a trabajar.`,
     icon: path.join(__dirname, '../img/clock.png'),
-    sound: true,
+    sound: false,
     wait: true
   });
 
@@ -28,12 +29,13 @@ class NotificationHandler {
     title: `Rest Alarm iniciado`,
     message: `Aplicación iniciada.`,
     icon: path.join(__dirname, '../img/clock.png'),
-    sound: true,
+    sound: false,
     wait: true
   });
 
   /* Notification Function*/
   sendNotification = ({ type, callBack, payload }) => {
+    player.play('./Notification.mp3');
     switch (type) {
       case 'INIT':
         notifier.notify(this.#initNotification(), callBack);
