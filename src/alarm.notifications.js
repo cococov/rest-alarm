@@ -35,7 +35,7 @@ class NotificationHandler {
 
   /* Notification Function*/
   sendNotification = ({ type, callBack, payload }) => {
-    player.play('./Notification.mp3');
+    player.play('./Notification.wav');
     switch (type) {
       case 'INIT':
         notifier.notify(this.#initNotification(), callBack);
